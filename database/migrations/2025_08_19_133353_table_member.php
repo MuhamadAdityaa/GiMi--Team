@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('no_telp');
             $table->string('password');
             $table->integer('paket');
+            $table->string('kode_qr');
             $table->date('tanggal_buat');
             $table->foreignId('kasirs_id')->constrained();
         });

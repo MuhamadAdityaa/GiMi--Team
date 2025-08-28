@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{
+    Auth,
+    DB,
+};
 use App\Models\{
     Admin,
     Member,
@@ -25,23 +28,60 @@ class AuthController extends Controller
 
         // cek di admins
         $tableAdmin = DB::table('admins')->where('username', $username)->first();
-        if ($tableAdmin && Hash::check($password, $tableAdmin->password)) {
-            return "Login sebagai Admin";
+        if (Auth::guard('admin')->attempt([
+            'username' => $request->username,
+            'password' => $request->password
+        ])) {
+            // regenerasi session biar status login tersimpan
+            $request->session()->regenerate();
+
+            return redirect()->route('admin');
         }
+        // if ($tableAdmin && Hash::check($password, $tableAdmin->password)) {
+        //     // return redirect()->route('dashboard');
+        //     return redirect()->route('admin');
+        // }
 
         // cek di members
         $tableMember = DB::table('members')->where('username', $username)->first();
         if ($tableMember && Hash::check($password, $tableMember->password)) {
             return "Login sebagai Member";
         }
-
+        
         // cek di kasirs
         $tableKasir = DB::table('kasirs')->where('username', $username)->first();
-        if ($tableKasir && Hash::check($password, $tableKasir->password)) {
-            return "Login sebagai Kasir";
+        if (Auth::guard('kasir')->attempt(['username' => $request->username, 'password'=> $request->password])) {
+            // return redirect()->route('dashboard');
+            return redirect()->route('kasir');
+        }
+        // if ($tableKasir && Hash::check($password, $tableKasir->password)) {
+        //     return "Login sebagai Kasir";
+        // }
+
+
+        return back()->withErrors([
+            'email' => 'Login gagal, periksa kembali data anda.',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        // List guard yang kamu punya
+        $guards = ['admin', 'kasir', 'member'];
+
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                // Logout hanya guard yang sedang login
+                Auth::guard($guard)->logout();
+                break; // keluar loop setelah ketemu
+            }
         }
 
+        // Hapus session & regenerate token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return view('auth.login');
+        // Redirect ke login
+        return redirect('/login');
     }
 }

@@ -13,12 +13,16 @@ class MemberSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('kasirs')->insert([
-            'code' => '201'.(1 + DB::table('kasirs')->max('id') ?? 0),
-            'name' => 'admin',
-            'username' => 'admin',
-            'no_telp' => '08988888888',
-            'password' => bcrypt('admin123'),
+        DB::table('members')->insert([
+            'code' => '303'.(1 + DB::table('members')->max('id') ?? 0),
+            'name' => 'adit',
+            'username' => 'adit',
+            'no_telp' => '08988888333',
+            'password' => bcrypt('adit123'),
+            'paket' => 1,
+            'kode_qr' => 'coba-coba',
+            'tanggal_buat' => date('Y-m-d'),
+            'kasirs_id' => 1,
         ]);
     }
 }
