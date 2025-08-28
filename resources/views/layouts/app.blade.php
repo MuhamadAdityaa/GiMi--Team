@@ -47,7 +47,7 @@
         </div>
     </nav>
 
-    <!-- Sidebar -->
+    {{-- <!-- Sidebar -->
     <div class="sidebar">
         <h5 class="text-center text-white">Menu</h5>
         @if(session('role') === 'admin')
@@ -62,7 +62,7 @@
         @elseif(session('role') === 'member')
             <a href="{{ route('dashboard.member') }}">Dashboard</a>
         @endif
-    </div>
+    </div> --}}
 
     <!-- Content -->
     <div class="content">
