@@ -14,7 +14,7 @@ class MemberSeeder extends Seeder
     public function run(): void
     {
         DB::table('members')->insert([
-            'code' => '303'.(1 + DB::table('members')->max('id') ?? 0),
+            'role' => 'member',
             'name' => 'adit',
             'username' => 'adit',
             'no_telp' => '08988888333',

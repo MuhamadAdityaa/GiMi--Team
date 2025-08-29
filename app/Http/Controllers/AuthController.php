@@ -37,16 +37,6 @@ class AuthController extends Controller
 
             return redirect()->route('admin');
         }
-        // if ($tableAdmin && Hash::check($password, $tableAdmin->password)) {
-        //     // return redirect()->route('dashboard');
-        //     return redirect()->route('admin');
-        // }
-
-        // cek di members
-        $tableMember = DB::table('members')->where('username', $username)->first();
-        if ($tableMember && Hash::check($password, $tableMember->password)) {
-            return "Login sebagai Member";
-        }
         
         // cek di kasirs
         $tableKasir = DB::table('kasirs')->where('username', $username)->first();

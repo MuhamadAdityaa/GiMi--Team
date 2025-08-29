@@ -57,7 +57,7 @@
 <body>
 
     <!-- Topbar -->
-    <nav class="navbar navbar-expand navbar-dark bg-dark shadow-sm fixed-top">
+    <nav class="navbar navbar-expand navbar-dark bg-dark shadow-sm sticky-top">
         <div class="container-fluid">
             <span class="navbar-brand">Majamanis Gym</span>
             <ul class="navbar-nav ms-auto">
@@ -74,14 +74,14 @@
         </div>
     </nav>
 
-    {{-- <!-- Sidebar -->
+    <!-- Sidebar -->
     <div class="sidebar">
         <h5 class="text-center text-white">Menu</h5>
-        @if (session('role') === 'admin')
-            <a href="{{ route('dashboard.admin') }}">Dashboard</a>
-            <a href="{{ route('member.index') }}">Data Member</a>
-            <a href="{{ route('laporan.index') }}">Laporan Pengunjung</a>
-            <a href="{{ route('kasir.index') }}">Kelola Kasir</a>
+        @if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role === 'admin')
+            <a href="#">Dashboard</a>
+            <a href="#">Data Member</a>
+            <a href="#">Laporan Pengunjung</a>
+            <a href="#">Kelola Kasir</a>
         @elseif(session('role') === 'kasir')
             <a href="{{ route('dashboard.kasir') }}">Dashboard</a>
             <a href="{{ route('member.index') }}">Data Member</a>
@@ -89,12 +89,13 @@
         @elseif(session('role') === 'member')
             <a href="{{ route('dashboard.member') }}">Dashboard</a>
         @endif
-    </div> --}}
+    </div>
 
     <!-- Content -->
     <div class="content">
         @yield('content')
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

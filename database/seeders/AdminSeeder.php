@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         DB::table('admins')->insert([
-            'code' => '101'.(1 + DB::table('admins')->max('id') ?? 0),
+            'role' => 'admin',
             'name' => 'admin',
             'username' => 'admin',
             'no_telp' => '08999999999',

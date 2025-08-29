@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\KasirMiddleware;
+use App\Http\Middleware\login;
+use App\Http\Middleware\LoginMiddleware;
+use App\Http\Middleware\MemberMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,7 +18,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         //
         $middleware->alias([
-            'check' => checkById::class
+            'admin' => AdminMiddleware::class,
+            'kasir' => KasirMiddleware::class,
+            'member' => MemberMiddleware::class,
+            'login' => LoginMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

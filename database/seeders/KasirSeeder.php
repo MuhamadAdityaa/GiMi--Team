@@ -14,7 +14,7 @@ class KasirSeeder extends Seeder
     public function run(): void
     {
         DB::table('kasirs')->insert([
-            'code' => '202'.(1 + DB::table('kasirs')->max('id') ?? 0),
+            'role' => 'kasir',
             'name' => 'kasir',
             'username' => 'kasir',
             'no_telp' => '08988888888',

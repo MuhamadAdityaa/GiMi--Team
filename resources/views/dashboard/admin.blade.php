@@ -4,6 +4,12 @@
 
 
 @section('content')
+    @if(session('warning'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('warning') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="row g-3">
         <div class="col-md-4">
             <div class="card text-bg-primary">
@@ -42,13 +48,13 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($latest as $l)
+            {{-- @foreach --}}
                 <tr>
-                    <td>{{ $l->member->nama }}</td>
-                    <td>{{ $l->kasir->nama ?? '-' }}</td>
-                    <td>{{ $l->tanggal->format('d/m/Y H:i') }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
-            @endforeach --}}
+            {{-- @endforeach --}}
         </tbody>
     </table>
 @endsection
