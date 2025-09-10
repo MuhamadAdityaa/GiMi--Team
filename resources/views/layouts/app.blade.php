@@ -51,6 +51,11 @@
         .table {
             color: #fff;
         }
+
+        .sidebar a.active {
+            background: #495057;
+            color: #fff !important;
+        }
     </style>
 </head>
 
@@ -68,7 +73,7 @@
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm">Logout</button>
-                    </form> 
+                    </form>
                 </li>
             </ul>
         </div>
@@ -78,10 +83,13 @@
     <div class="sidebar">
         <h5 class="text-center text-white">Menu</h5>
         @if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role === 'admin')
-            <a href="#">Dashboard</a>
-            <a href="#">Data Member</a>
+            <a href="{{ route('admin.dashboard') }}"
+                class="nav-link  {{ Route::is('admin*') ? 'active' : '' }}">Dashboard</a>
+            <a href="{{ route('member.index') }}"
+                class="nav-link  {{ Route::is('member*') ? 'active' : '' }}">Data Member</a>
             <a href="#">Laporan Pengunjung</a>
-            <a href="#">Kelola Kasir</a>
+            <a href="{{ route('kasir.index') }}"
+                class="nav-link {{ Route::is('kasir*') ? 'active' : '' }}">Kelola Kasir</a>
         @elseif(session('role') === 'kasir')
             <a href="{{ route('dashboard.kasir') }}">Dashboard</a>
             <a href="{{ route('member.index') }}">Data Member</a>

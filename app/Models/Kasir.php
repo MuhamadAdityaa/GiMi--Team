@@ -12,6 +12,7 @@ class Kasir extends Authenticatable
 
     protected $fillable = [
         'code',
+        'role',
         'name',
         'username',
         'no_telp',
@@ -20,5 +21,9 @@ class Kasir extends Authenticatable
 
     public function member() {
         return $this->hasMany(Member::class, 'kasirs_id');
+    }
+
+    public function laporan() {
+        return $this->hasMany(Laporan::class);
     }
 }

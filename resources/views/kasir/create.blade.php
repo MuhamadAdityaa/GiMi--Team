@@ -3,7 +3,7 @@
 @section('page-title','Tambah Kasir')
 
 @section('content')
-<form action="{{ route('kasir.store') }}" method="post" class="card p-3">
+<form action="{{ route('kasir.create.store') }}" method="post" class="card p-3">
     @csrf
     <div class="mb-3">
         <label>Nama</label>

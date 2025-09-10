@@ -17,7 +17,7 @@ class LoginMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role === 'admin') {
-            return redirect()->route('admin')->with('warning', "Kamu sudah login sebagai Admin.");
+            return redirect()->route('admin.dashboard')->with('warning', "Kamu sudah login sebagai Admin.");
         } elseif (Auth::guard('member')->check() && Auth::guard('member')->user()->role === 'member') {
             return abort(403, 'Unauthorized');
         }

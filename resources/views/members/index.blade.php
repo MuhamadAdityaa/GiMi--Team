@@ -19,18 +19,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($members as $i => $m)
+            @foreach ($member as $i => $m)
                 <tr>
                     <td>{{ $i + 1 }}</td>
-                    <td>{{ $m->nama }}</td>
+                    <td>{{ $m->name }}</td>
                     <td>{{ $m->username }}</td>
                     <td>{{ $m->paket }}</td>
                     <td>
                         <a href="{{ route('member.edit', $m) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('member.destroy', $m) }}" method="post" class="d-inline">
+                        {{-- <form action="{{ route('member.destroy', $m) }}" method="post" class="d-inline">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus member?')">Hapus</button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
             @endforeach

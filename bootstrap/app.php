@@ -8,6 +8,7 @@ use App\Http\Middleware\MemberMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Facade;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -22,8 +23,13 @@ return Application::configure(basePath: dirname(__DIR__))
             'kasir' => KasirMiddleware::class,
             'member' => MemberMiddleware::class,
             'login' => LoginMiddleware::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
-    })->create();
+    })
+    // 'aliases' => Facade::defaultAliases()->merge([
+    //     'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+    // ])->toArray(),
+->create();

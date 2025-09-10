@@ -35,9 +35,9 @@ class AuthController extends Controller
             // regenerasi session biar status login tersimpan
             $request->session()->regenerate();
 
-            return redirect()->route('admin');
+            return redirect()->route('admin.dashboard');
         }
-        
+
         // cek di kasirs
         $tableKasir = DB::table('kasirs')->where('username', $username)->first();
         if (Auth::guard('kasir')->attempt(['username' => $request->username, 'password'=> $request->password])) {

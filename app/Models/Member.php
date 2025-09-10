@@ -11,16 +11,27 @@ class Member extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
+        'role',
         'name',
-        'email',
+        'username',
         'no_telp',
+        'password',
         'paket',
+        'kode_qr',
         'tanggal_buat',
         'kasirs_id',
+    ];
+
+    protected $casts = [
+        'paket' => 'integer',
     ];
 
     public function kasir()
     {
         return $this->belongsTo(Kasir::class);
+    }
+
+    public function laporan() {
+        return $this->hasMany(Laporan::class);
     }
 }

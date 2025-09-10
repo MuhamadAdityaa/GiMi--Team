@@ -15,7 +15,7 @@
             <div class="card text-bg-primary">
                 <div class="card-body text-center">
                     <h5>Total Member</h5>
-                    <p class="display-6"></p>
+                    <p class="display-6">{{ $member }}</p>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="card text-bg-success">
                 <div class="card-body text-center">
                     <h5>Total Kasir</h5>
-                    <p class="display-6"></p>
+                    <p class="display-6">{{ $kasir }}</p>
                 </div>
             </div>
         </div>
