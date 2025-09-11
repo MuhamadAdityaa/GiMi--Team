@@ -31,7 +31,7 @@
             <div class="card text-bg-warning">
                 <div class="card-body text-center">
                     <h5>Check-in Hari Ini</h5>
-                    <p class="display-6"></p>
+                    <p class="display-6">{{ $laporan->count() }}</p>
                 </div>
             </div>
         </div>
@@ -48,13 +48,13 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach --}}
+            @foreach ($laporan as $l)
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $l->member->name ?? '-' }}</td>
+                    <td>{{ $l->kasir->name ?? '-' }}</td>
+                    <td>{{ $l->tanggal }}</td>
                 </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 @endsection

@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\{
     Member,
     Kasir,
+    Laporan,
 };
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
 {
@@ -17,11 +20,11 @@ class DashboardController extends Controller
             $member = Member::all();
             dd($member);
 
-            return redirect()->route('dashboard.admin', compact(''));
+            return redirect()->route('admin.dashboard', compact(''));
         } elseif (Auth::guard('kasir')->check()) {
-            return redirect()->route('dashboard.kasir');
+            return redirect()->route('kasir.dashboard');
         } elseif (Auth::guard('member')->check()) {
-            return redirect()->route('dashboard.member');
+            return redirect()->route('member.dashboard');
         }
 
         return redirect()->route('login'); // kalau belum login
@@ -31,18 +34,19 @@ class DashboardController extends Controller
     {
         $member = Member::count();
         $kasir = Kasir::count();
-        // dd($member);
+        $laporan = Laporan::whereDate('tanggal', Carbon::now()->toDateString())->get();
+        // dd($laporan);
 
-        return view('dashboard.admin', compact('member', 'kasir'));
+        return view('dashboard.admin', compact('member', 'kasir', 'laporan'));
     }
 
     public function kasir()
     {
-        return view('dashboard.kasir');
-    }
+        $member = Member::count();
+        $kasir = Kasir::count();
+        $laporan = Laporan::whereDate('tanggal', Carbon::now()->toDateString())->get();
+        // dd($laporan);
 
-    public function member()
-    {
-        return view('dashboard.member');
+        return view('dashboard.admin', compact('member', 'kasir', 'laporan'));
     }
 }

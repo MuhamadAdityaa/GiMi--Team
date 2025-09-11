@@ -16,13 +16,13 @@ class KasirMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role === 'admin') {
+        if (Auth::guard('kasir')->check() && Auth::guard('kasir')->user()->role === 'kasir') {
             return abort(403, 'Unauthorized');
         } elseif (Auth::guard('member')->check() && Auth::guard('member')->user()->role === 'member') {
             return abort(403, 'Unauthorized');
         }
 
-        if (Auth::guard('kasir')->check() && Auth::guard('kasir')->user()->role === 'kasir') {
+        if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role === 'admin') {
             return $next($request);
         }
         return redirect('login')->with('error', "Kamu tidak memiliki akses ke halaman tersebut.");

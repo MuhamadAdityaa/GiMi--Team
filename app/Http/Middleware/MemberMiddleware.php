@@ -22,7 +22,7 @@ class MemberMiddleware
             return abort(403, 'Unauthorized');
         }
 
-        if (Auth::guard('member')->check() && Auth::guard('kasir')->user()->role === 'member') {
+        if (Auth::guard('member')->check() && Auth::guard('member')->user()->role === 'member') {
             return $next($request);
         }
         return redirect('login')->with('error', "Kamu tidak memiliki akses ke halaman tersebut.");

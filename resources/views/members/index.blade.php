@@ -26,11 +26,11 @@
                     <td>{{ $m->username }}</td>
                     <td>{{ $m->paket }}</td>
                     <td>
-                        <a href="{{ route('member.edit', $m) }}" class="btn btn-sm btn-warning">Edit</a>
-                        {{-- <form action="{{ route('member.destroy', $m) }}" method="post" class="d-inline">
+                        <a href="{{ route('member.edit', $m) }}" class="btn btn-sm btn-warning">Update</a>
+                        <form action="{{ route('member.delete', $m) }}" method="post" class="d-inline">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus member?')">Hapus</button>
-                        </form> --}}
+                        </form>
                     </td>
                 </tr>
             @endforeach

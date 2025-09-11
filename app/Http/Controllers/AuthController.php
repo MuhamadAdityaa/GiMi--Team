@@ -42,11 +42,19 @@ class AuthController extends Controller
         $tableKasir = DB::table('kasirs')->where('username', $username)->first();
         if (Auth::guard('kasir')->attempt(['username' => $request->username, 'password'=> $request->password])) {
             // return redirect()->route('dashboard');
-            return redirect()->route('kasir');
+            $request->session()->regenerate();
+            return redirect()->route('kasir.dashboard');
         }
         // if ($tableKasir && Hash::check($password, $tableKasir->password)) {
         //     return "Login sebagai Kasir";
         // }
+
+        $tableMember = DB::table('members')->where('username', $username)->first();
+        if (Auth::guard('member')->attempt(['username' => $request->username, 'password'=> $request->password])) {
+            // return redirect()->route('dashboard');
+            $request->session()->regenerate();
+            return redirect()->route('member.dashboard');
+        }
 
 
         return back()->withErrors([

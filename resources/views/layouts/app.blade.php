@@ -85,15 +85,21 @@
         @if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role === 'admin')
             <a href="{{ route('admin.dashboard') }}"
                 class="nav-link  {{ Route::is('admin*') ? 'active' : '' }}">Dashboard</a>
-            <a href="{{ route('member.index') }}"
-                class="nav-link  {{ Route::is('member*') ? 'active' : '' }}">Data Member</a>
-            <a href="#">Laporan Pengunjung</a>
-            <a href="{{ route('kasir.index') }}"
-                class="nav-link {{ Route::is('kasir*') ? 'active' : '' }}">Kelola Kasir</a>
-        @elseif(session('role') === 'kasir')
-            <a href="{{ route('dashboard.kasir') }}">Dashboard</a>
-            <a href="{{ route('member.index') }}">Data Member</a>
-            <a href="{{ route('laporan.index') }}">Laporan Pengunjung</a>
+            <a href="{{ route('member.index') }}" class="nav-link  {{ Route::is('member*') ? 'active' : '' }}">Data
+                Member</a>
+            <a href="{{ route('laporan.index') }}" class="nav-link {{ Route::is('laporan*') ? 'active' : '' }}">Laporan
+                Pengunjung</a>
+            <a href="{{ route('kasir.index') }}" class="nav-link {{ Route::is('kasir*') ? 'active' : '' }}">Kelola
+                Kasir</a>
+            <a href="{{ route('kamera.scan') }}" class="btn btn-success">Buka Kamera</a>
+        @elseif(Auth::guard('kasir')->check() && Auth::guard('kasir')->user()->role === 'kasir')
+            <a href="{{ route('admin.dashboard') }}"
+                class="nav-link  {{ Route::is('admin*') ? 'active' : '' }}">Dashboard</a>
+            <a href="{{ route('member.index') }}" class="nav-link  {{ Route::is('member*') ? 'active' : '' }}">Data
+                Member</a>
+            <a href="{{ route('laporan.index') }}" class="nav-link {{ Route::is('laporan*') ? 'active' : '' }}">Laporan
+                Pengunjung</a>
+            <a href="{{ route('kamera.scan') }}" class="btn btn-success">Buka Kamera</a>
         @elseif(session('role') === 'member')
             <a href="{{ route('dashboard.member') }}">Dashboard</a>
         @endif
