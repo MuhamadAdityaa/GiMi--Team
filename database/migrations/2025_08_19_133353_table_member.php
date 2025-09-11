@@ -21,7 +21,9 @@ return new class extends Migration
             $table->integer('paket');
             $table->string('kode_qr');
             $table->date('tanggal_buat');
-            $table->foreignId('kasirs_id')->constrained();
+            $table->date('tanggal_update')->nullable();
+            $table->date('tanggal_berakhir');
+            $table->foreignId('kasirs_id')->nullable()->constrained()->onDelete('set null');
         });
     }
 

@@ -86,4 +86,11 @@ class KasirController extends Controller
             ], 404);
         }
     }
+
+    public function destroy($id) {
+        $kasir = Kasir::findOrFail($id);
+        $kasir->delete();
+
+        return redirect()->route('kasir.index')->with('succes', 'Data kasir berhasil dihapus');
+    }
 }

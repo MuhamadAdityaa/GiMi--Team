@@ -36,7 +36,7 @@ class MemberController extends Controller
         $token = str::uuid();
 
         $qrContent = route('member.qrkode', ['id' => $token]);
-        $qrImage = QrCode::size(300)->generate($qrContent);
+        $qrImage = QrCode::format('png')->size(300)->generate($qrContent);
         // $qrImage = QrCode::format('png')
         //     ->size(300)
         //     ->errorCorrection('H')
@@ -63,12 +63,14 @@ class MemberController extends Controller
             'kasirs_id' => $request->kasir,
         ]);
 
-        return redirect()->route('members.index')->with('succes', 'Data member berhasil ditambahkan');
+        return redirect()->route('member.index')->with('succes', 'Data member berhasil ditambahkan');
     }
 
     public function showEdit($id)
     {
-        return view('members.edit');
+        $member = Member::findOrFail($id);
+
+        return view('members.edit', compact('member'));
     }
 
     public function qrkode($id)

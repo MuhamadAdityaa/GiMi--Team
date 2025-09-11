@@ -10,6 +10,8 @@ class Member extends Authenticatable
 {
     use Notifiable;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'role',
         'name',

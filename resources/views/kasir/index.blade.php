@@ -27,10 +27,10 @@
                     <td>{{ $k->no_telp }}</td>
                     <td>
                         <a href="{{ route('kasir.showEdit', $k) }}" class="btn btn-sm btn-warning">Edit</a>
-                        {{-- <form action="{{ route('kasir.destroy', $k) }}" method="post" class="d-inline">
+                        <form action="{{ route('kasir.delete', $k) }}" method="post" class="d-inline">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus kasir?')">Hapus</button>
-                        </form> --}}
+                        </form>
                     </td>
                 </tr>
             @endforeach

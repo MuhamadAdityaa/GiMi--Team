@@ -40,4 +40,5 @@ Route::middleware('admin')->controller(KasirController::class)->group(function()
     Route::put('/kasir/update/{id}', 'update')->name('kasir.update');
     Route::get('/kasir/edit/password/{id}', 'passwordEdit')->name('kasir.edit.password');
     Route::put('kasir/update/password/{id}', 'passwordUpdate')->name('kasir.update.password');
+    Route::delete('/kasir/delete/{id}', 'destroy')->name('kasir.delete');
 });
