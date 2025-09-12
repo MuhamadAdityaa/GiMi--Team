@@ -75,7 +75,7 @@
                 let cameraId = cameras[0].id;
                 html5QrCode.start(
                     cameraId, {
-                        fps: 60,
+                        fps: 15,
                         qrbox: 250
                     },
                     (decodedText) => {
@@ -91,23 +91,23 @@
         }).catch(err => {
             console.error("Camera Error:", err);
         });
-        @if (session('success') || session('error')) 
+        @if (session('success') || session('error'))
 
             setTimeout(() => {
                 let successAlert = document.getElementById('alert-success');
                 let errorAlert = document.getElementById('alert-error');
-    
+
                 if (successAlert) {
                     successAlert.classList.remove('show');
                     successAlert.classList.add('fade');
                 }
-    
+
                 if (errorAlert) {
                     errorAlert.classList.remove('show');
                     errorAlert.classList.add('fade');
                 }
             }, 5000);
-            
+
         @endif
         // Tunggu 5 detik, lalu sembunyikan alert
     </script>

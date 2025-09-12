@@ -14,7 +14,8 @@ class MemberSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('members')->insert([
+        DB::table('members')->insert(
+        [
             'role' => 'member',
             'name' => 'adit',
             'username' => 'adit',
@@ -25,6 +26,31 @@ class MemberSeeder extends Seeder
             'tanggal_buat' => carbon::now()->toDateString(),
             'tanggal_berakhir' => carbon::now()->addDays(30)->toDateString(),
             'kasirs_id' => 1,
-        ]);
+        ],
+        [
+            'role' => 'member',
+            'name' => 'budi',
+            'username' => 'budi',
+            'no_telp' => '08988888444',
+            'password' => bcrypt('budi123'),
+            'paket' => 1,
+            'kode_qr' => 'coba-coba',
+            'tanggal_buat' => carbon::now()->toDateString(),
+            'tanggal_berakhir' => carbon::now()->addDays(30)->toDateString(),
+            'kasirs_id' => 1,
+        ],
+        [
+            'role' => 'member',
+            'name' => 'caca',
+            'username' => 'caca',
+            'no_telp' => '08988888555',
+            'password' => bcrypt('caca123'),
+            'paket' => 2,
+            'kode_qr' => 'coba-coba',
+            'tanggal_buat' => carbon::now()->toDateString(),
+            'tanggal_berakhir' => carbon::now()->addDays(60)->toDateString(),
+            'kasirs_id' => 1,
+        ]
+    );
     }
 }

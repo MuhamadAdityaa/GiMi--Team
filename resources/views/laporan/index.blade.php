@@ -8,6 +8,35 @@
         <h4>Laporan Pengunjung</h4>
         <a href="{{ route('laporan.create') }}" class="btn btn-primary">+ Input Manual</a>
     </div>
+    <!-- Tombol filter -->
+    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filterModal">
+        Pilih Tanggal
+    </button>
+    <a class="btn btn-secondary" href="{{ route('laporan.index') }}">
+        Clear Filter
+    </a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="filterModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="filterForm" method="GET"> <!-- form akan submit ke JS dulu -->
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pilih Tanggal</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="date" name="tanggal" id="filterDate" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Terapkan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
@@ -40,5 +69,20 @@
                 </tr>
             @endforeach
         </tbody>
-    </table>
-@endsection
+        <script>
+            document.getElementById('filterForm').addEventListener('submit', function(e) {
+                e.preventDefault(); // jangan reload page
+                const tanggal = document.getElementById('filterDate').value;
+
+                if (!tanggal) {
+                    alert('Pilih tanggal dulu!');
+                    return;
+                }
+
+                // ubah format tanggal ke MM-DD-YYYY kalau mau
+                // atau langsung YYYY-MM-DD (sesuai DB)
+                const url = `/laporan/filter/${tanggal}`;
+                window.location.href = url; // redirect ke URL
+            });
+        </script>
+    @endsection

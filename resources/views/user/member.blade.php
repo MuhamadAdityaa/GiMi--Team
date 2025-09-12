@@ -28,7 +28,7 @@
             position: relative;
             width: 100%;
             height: 220px;
-            background: url('{{ asset('images/header-bg.png') }}') center/cover no-repeat;
+            background: url('{{ asset('images/bg_login.png') }}') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;

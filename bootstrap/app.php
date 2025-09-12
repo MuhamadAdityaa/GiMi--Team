@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'kasir' => KasirMiddleware::class,
             'member' => MemberMiddleware::class,
             'login' => LoginMiddleware::class,
+            'authKasir' => App\Http\Middleware\AuthKasirMiddleware::class,
 
         ]);
     })

@@ -76,4 +76,22 @@ class LaporanController extends Controller
             ], 404);
         }
     }
+
+    public function filterByDate($tanggal, Request $request)
+    {
+        // Validasi format tanggal (YYYY-MM-DD)
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggal)) {
+            abort(400, 'Format tanggal salah'); // jika tidak sesuai
+        }
+
+        // Ambil data laporan sesuai tanggal
+        $laporan = Laporan::with(['member', 'kasir'])
+            ->whereDate('tanggal', $tanggal)
+            ->get();
+
+        // Kirim ke view index
+        return view('laporan.index', compact('laporan'));
+    }
+
+
 }

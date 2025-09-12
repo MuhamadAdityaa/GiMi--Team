@@ -23,7 +23,8 @@ Route::controller(AuthController::class)->group(function(){
 Route::controller(dashboardController::class)->group(function(){
     Route::get('/', 'index')->name('dashboard')->Middleware('login');
     Route::get('/admin', 'admin')->name('admin.dashboard')->Middleware(['admin']);
-    Route::get('/kasir', 'kasir')->name('kasir.dashboard')->middleware(['kasir']);
+    Route::get('/kasir', 'kasir')->name('kasir.dashboard')->middleware(['authKasir']);
+    Route::get('/dashboard/filter', 'filtering')->name('dashboard.filter');
 });
 
 Route::middleware('admin')->controller(MemberController::class)->group(function(){
@@ -52,6 +53,7 @@ Route::middleware('admin')->controller(LaporanController::class)->group(function
     Route::get('/laporan/edit/{id}', 'showEdit')->name('laporan.showEdit')->middleware('kasir');
     Route::put('/laporan/update/{id}', 'update')->name('laporan.update')->middleware('kasir');
     Route::delete('/laporan/delete/{id}', 'destroy')->name('laporan.delete')->middleware('kasir');
+    Route::get('/laporan/filter/{tanggal}', 'filterByDate')->name('laporan.filter');
 });
 
 Route::middleware(['admin', 'kasir'])->controller(KasirController::class)->group(function() {

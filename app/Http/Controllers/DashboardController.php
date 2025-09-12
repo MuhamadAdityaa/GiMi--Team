@@ -49,4 +49,49 @@ class DashboardController extends Controller
 
         return view('dashboard.admin', compact('member', 'kasir', 'laporan'));
     }
+
+    public function filtering(Request $request)
+    {
+        $periode = $request->get('periode', 'today'); // default: today
+
+        $query = Laporan::query();
+
+        switch ($periode) {
+            case 'today':
+                $query->whereDate('tanggal', Carbon::today());
+                $member = Member::count();
+                $kasir = Kasir::count();
+                $laporan = Laporan::whereDate('tanggal', Carbon::now()->toDateString())->get();
+                break;
+
+            case 'yesterday':
+                $query->whereDate('tanggal', Carbon::yesterday());
+                $member = Member::count();
+                $kasir = Kasir::count();
+                $laporan = Laporan::whereDate('tanggal', Carbon::yesterday()->toDateString())->get();
+                break;
+
+            case '7days':
+                $query->whereDate('tanggal', '>=', Carbon::now()->subDays(7));
+                $member = Member::count();
+                $kasir = Kasir::count();
+                $laporan = Laporan::whereDate('tanggal', '>=', Carbon::now()->subDays(7))->get();
+                break;
+
+            case '30days':
+                $query->whereDate('tanggal', '>=', Carbon::now()->subDays(30));
+                $member = Member::count();
+                $kasir = Kasir::count();
+                $laporan = Laporan::whereDate('tanggal', '>=', Carbon::now()->subDays(30))->get();
+                break;
+
+            default:
+                // default ambil hari ini
+                $query->whereDate('tanggal', Carbon::today());
+        }
+
+        $laporans = $query->get();
+
+        return view('dashboard.admin', compact('laporans', 'periode', 'member', 'kasir', 'laporan'));
+    }
 }
